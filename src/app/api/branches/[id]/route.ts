@@ -47,13 +47,15 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   if (!parsed.success) return NextResponse.json({ error: "Datos inválidos", details: parsed.error.issues }, { status: 400 });
 
   const { defaultUnitPrice, ...rest } = parsed.data;
-  const data: Record<string, unknown> = { ...rest };
-  if (defaultUnitPrice !== undefined) {
-    data.defaultUnitPrice = String(defaultUnitPrice);
-  }
 
   try {
-    const updated = await prisma.branch.update({ where: { id }, data });
+    const updated = await prisma.branch.update({
+      where: { id },
+      data: {
+        ...rest,
+        ...(defaultUnitPrice !== undefined && { defaultUnitPrice }),
+      },
+    });
     return NextResponse.json(updated);
   } catch (err) {
     console.error("Error updating branch:", err);

@@ -24,12 +24,11 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   const parsed = updateSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
 
-  const updateData: Record<string, unknown> = { ...parsed.data };
-  if (parsed.data.password) {
-    updateData.password = await bcrypt.hash(parsed.data.password, 10);
-  } else {
-    delete updateData.password;
-  }
+  const { password, ...rest } = parsed.data;
+  const updateData = {
+    ...rest,
+    ...(password ? { password: await bcrypt.hash(password, 10) } : {}),
+  };
 
   const user = await prisma.user.update({
     where: { id },
