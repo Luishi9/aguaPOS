@@ -93,7 +93,7 @@ export function Sidebar({ user, isOpen = false, onClose }: SidebarProps) {
       {/* Logo */}
       <div className="flex items-center justify-between px-5 py-4 border-b">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-agua-600 shadow-sm shrink-0">
+          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-amber-500 shadow-sm shrink-0">
             <Droplets className="w-5 h-5 text-white" />
           </div>
           <div>

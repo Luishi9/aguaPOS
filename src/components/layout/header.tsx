@@ -49,7 +49,7 @@ export function Header({ user, onMenuClick }: HeaderProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="flex items-center gap-2 px-2 md:px-3">
-              <div className="w-7 h-7 rounded-full bg-agua-100 flex items-center justify-center text-agua-700 font-semibold text-xs shrink-0">
+              <div className="w-7 h-7 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-semibold text-xs shrink-0">
                 {user.name?.charAt(0).toUpperCase() ?? "U"}
               </div>
               <span className="hidden sm:block text-sm font-medium max-w-[120px] truncate">{user.name}</span>
