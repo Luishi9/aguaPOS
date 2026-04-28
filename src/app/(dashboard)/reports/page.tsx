@@ -258,7 +258,7 @@ export default function ReportsPage() {
       {!data && !isLoading && (
         <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
           <BarChart3 className="w-12 h-12 mb-3 opacity-30" />
-          <p className="text-sm">Selecciona los filtros y haz clic en "Generar"</p>
+          <p className="text-sm">Selecciona los filtros y haz clic en &quot;Generar&quot;</p>
         </div>
       )}
     </div>

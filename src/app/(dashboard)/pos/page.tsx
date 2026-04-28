@@ -61,7 +61,7 @@ export default function POSPage() {
   const [form, setForm] = useState({
     containersDelivered: 1,
     containersReturned: 0,
-    unitPrice: 2500,
+    unitPrice: defaultPrice,
     amountPaid: 0,
     paymentMethod: "CASH",
     discount: 0,
@@ -71,6 +71,7 @@ export default function POSPage() {
   // Actualizar precio cuando carga la sucursal
   useEffect(() => {
     if (branchData) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setForm((prev) => ({ ...prev, unitPrice: Number(branchData.defaultUnitPrice) }));
     }
   }, [branchData]);
