@@ -39,13 +39,14 @@ export async function POST(req: Request) {
   }
 
   const { defaultUnitPrice, ...rest } = parsed.data;
-  const createData: Record<string, unknown> = { ...rest };
-  if (defaultUnitPrice !== undefined) {
-    createData.defaultUnitPrice = String(defaultUnitPrice);
-  }
 
   const branch = await prisma.$transaction(async (tx) => {
-    const newBranch = await tx.branch.create({ data: createData });
+    const newBranch = await tx.branch.create({
+      data: {
+        ...rest,
+        ...(defaultUnitPrice !== undefined && { defaultUnitPrice }),
+      },
+    });
     await tx.inventory.create({
       data: { branchId: newBranch.id, fullContainers: 0, emptyContainers: 0 },
     });
